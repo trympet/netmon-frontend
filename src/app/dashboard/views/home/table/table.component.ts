@@ -45,8 +45,13 @@ export class TableComponent implements AfterViewInit, OnInit {
   }
 
   updateSnmp() {
-    this.dashboardService.getUpdateSnmp().subscribe( val => 
-      this.updateSnmpString = val ? 'Loading...' : 'Update SNMP'
+    this.dashboardService.getUpdateSnmp().subscribe( 
+      val => this.updateSnmpString = val ? 'Loading...' : 'Update SNMP',
+      err => this.updateSnmpString = 'Error, try again.',
+      () => {
+        this.updateSnmpString = 'Update SNMP';
+        this.dashboardService.updateSnmpResult()
+      }
       )
   }
 

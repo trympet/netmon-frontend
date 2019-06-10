@@ -81,9 +81,7 @@ export class TableDataSource extends DataSource<TableItem> {
       err => console.error(err),
       () => {
         this.snmpObservable.subscribe((value: Array<any>) => value.map( snmpObj => {
-          this.data.find(hostsObj => hostsObj.host_id === snmpObj.host_id)['snmp'] = snmpObj.data
-          console.log(snmpObj.hostname);
-          
+          this.data.find(hostsObj => hostsObj.host_id === snmpObj.host_id)['snmp'] = snmpObj.data       
         })
         )
         this.paginator.page.emit()

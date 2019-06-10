@@ -12,10 +12,11 @@ import { MatTableModule, MatPaginatorModule, MatSortModule, MatRippleModule, Mat
 import { DashboardService } from './dashboard.service';
 import { RowExpandDirective } from './views/home/table/row-expand.directive';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { GroupsComponent } from './views/groups/groups.component';
 
 
 @NgModule({
-  declarations: [DashboardComponent, HomeComponent, TableComponent, RowExpandDirective],
+  declarations: [DashboardComponent, HomeComponent, TableComponent, RowExpandDirective, GroupsComponent],
   imports: [
     HttpClientModule,
     CommonModule,

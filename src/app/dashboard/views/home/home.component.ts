@@ -11,51 +11,39 @@ import { count, map, filter } from 'rxjs/operators';
 })
 export class HomeComponent implements OnInit {
 
-  devicesUp: Number = 0;
-  devicesDown: Number = 0;
-
-
-  constructor(private dashboardService: DashboardService) { }
-
-  
-  
+  constructor(private dashboardService: DashboardService) { } 
 
   ngOnInit() {
-
+    /* DRAWS DONUT GRAPH */
     this.dashboardService.getSnmpResult().pipe(
-      map((x: Array<any>) => {return {'up': x.length, 'down': x.filter(val => val.error === true).length } })
-    ).subscribe(val => {
-      this.devicesDown = val.down;
-      this.devicesUp = val.up;
-      console.log(val);
-      
-    },
-    err => console.log(err),
-    () => {
-      const chartOptions = {
-        type: 'doughnut',
-        data: {
-          labels: ['Up', 'Down'],
-          datasets: [{
-            label: 'Device status',
-            data: [this.devicesUp, this.devicesDown],
-            backgroundColor: ['#36a2eb', '#ff6384'],
-  
-          }],
-  
-  
+      // returns scalars of devices that are up/down
+      // from SNMP data
+      map((x: Array<any>) => { 
+        return {'up': x.length, 'down': x.filter(val => val.data[0].error === true).length } 
+      })
+    ).subscribe( val => {
+        // draws donut graph when SNMP data updates
+        let devicesDown = val.down;
+        let devicesUp = val.up;
+        const chartOptions = {
+          type: 'doughnut',
+          data: {
+            labels: ['Up', 'Down'],
+            datasets: [{
+              label: 'Device status',
+              data: [devicesUp, devicesDown],
+              backgroundColor: ['#36a2eb', '#ff6384'],
+    
+            }],
+          }
         }
-      }
-      let ctx = document.querySelector('.test');
-      new Chart(ctx, chartOptions)
-    }
-    
+        let ctx = document.querySelector('.test');
+        new Chart(ctx, chartOptions)
+        },
+      err => console.log(err),    
     )
-
-
-
-
-    
   }
+
+
 
 }

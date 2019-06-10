@@ -1,9 +1,9 @@
-<div class="mat-elevation-z8">
-  <div class="header-row" style="margin: 0 1rem; display: block; position: relative;">
+<div class="mat-elevation-z8" style="position: relative;">
+  <div class="header-row">
     <mat-form-field>
       <input matInput type="text" (keyup)="filterTable($event.target.value)" placeholder="Filter hostnames">
     </mat-form-field>
-    <button mat-raised-button color="primary" (click)="updateSnmp()">{{ updateSnmpString }}</button>
+    <button mat-raised-button color="primary" (click)="updateSnmp()"  style="float: right; margin-top: 10px;">{{ updateSnmpString }}</button>
   </div>
   <mat-table class="full-width-table" matSort aria-label="Elements">
 
@@ -44,5 +44,6 @@
   <div mat-row class="mat-row detail-row" [@detailExpand]
   style="overflow: hidden;">
     <p *ngFor="let snmpData of element.snmp">{{ snmpData.varbind }}: {{ snmpData.res }}</p>
+    <button mat-raised-button color="warning">See interfaces</button>
   </div>
 </ng-template>
