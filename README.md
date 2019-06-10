@@ -1,6 +1,14 @@
 # SimpleNetmon
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.0.1.
+A simple webgui for monitoring devices with SNMP. Allows for grouping, and adding custom MIBs (yay!) to groups.
+
+You can see devices at a quick glance, or you can get more in-deapth information about a certain device, including interface traffic, IP-addresses etc. 
+
+It is built with the intent of removing all the "fluff" from other SNMP monitoring services, such as Observium. Therefore it is easy to find the information you want without having to navigate though dosens of menus.
+
+It is built to work with a restful backend with an SQL database. 
+
+This project was also generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.0.1.
 
 ## Development server
 
@@ -14,14 +22,3 @@ Run `ng generate component component-name` to generate a new component. You can 
 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
 
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
