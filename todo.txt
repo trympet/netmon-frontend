@@ -1,0 +1,15 @@
+https://medium.com/pulsar/modern-enterprise-ui-design-part-1-tables-ad8ee1b9feb
+
+INFO TO DISPLAY:
+  uptime
+  hostname
+  IP
+  status (up), (down)
+  donut chart summary https://developers.google.com/chart/interactive/docs/gallery/piechart#making-a-donut-chart
+
+
+Dashboard:
+  - sort by: IP, UP/DOWN,
+  - filter: hostname, IP
+  - pin devices to top
+  - ignore devices

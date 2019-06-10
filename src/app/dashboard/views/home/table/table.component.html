@@ -1,0 +1,48 @@
+<div class="mat-elevation-z8">
+  <div class="header-row" style="margin: 0 1rem; display: block; position: relative;">
+    <mat-form-field>
+      <input matInput type="text" (keyup)="filterTable($event.target.value)" placeholder="Filter hostnames">
+    </mat-form-field>
+    <button mat-raised-button color="primary" (click)="updateSnmp()">{{ updateSnmpString }}</button>
+  </div>
+  <mat-table class="full-width-table" matSort aria-label="Elements">
+
+    <!-- Id Column -->
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Name</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{row.name}}</mat-cell>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="host">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Host</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{row.host}}</mat-cell>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="snmp">
+      <mat-header-cell  *matHeaderCellDef mat-sort-header>Status</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{ row.hasOwnProperty('snmp') ? 'up' : 'down' }}</mat-cell>
+    </ng-container>
+    <ng-container>
+      <tr>test</tr>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;" matRipple class="element-row"
+     [tableRowExpand]="row" [tableDetailRowTpl]="tpl"></mat-row>
+  </mat-table>
+
+  <mat-paginator #paginator
+      [length]="dataSource?.data.length"
+      [pageIndex]="0"
+      [pageSize]="50"
+      [pageSizeOptions]="[25, 50, 100, 250]">
+  </mat-paginator>
+</div>
+<ng-template #tpl let-element>
+  <div mat-row class="mat-row detail-row" [@detailExpand]
+  style="overflow: hidden;">
+    <p *ngFor="let snmpData of element.snmp">{{ snmpData.varbind }}: {{ snmpData.res }}</p>
+  </div>
+</ng-template>
