@@ -17,7 +17,8 @@ export class NavComponent implements OnInit {
 
   navLinks: Array<any> = [
     {name: 'Dashboard', routerLink: '/dashboard'},
-    {name: 'Groups', routerLink: '/groups'},
+    {name: 'Groups', routerLink: '/dashboard/groups'},
+    {name: 'MIBs', routerLink: '/dashboard/mibs'},
 
   ]
 

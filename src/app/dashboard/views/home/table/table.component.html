@@ -3,10 +3,31 @@
     <mat-form-field>
       <input matInput type="text" (keyup)="filterTable($event.target.value)" placeholder="Filter hostnames">
     </mat-form-field>
-    <button mat-raised-button color="primary" (click)="updateSnmp()"  style="float: right; margin-top: 10px;">{{ updateSnmpString }}</button>
+    <button mat-raised-button *ngIf="isSelected()" (click)="openDialog()">Add to group</button>
+    <button mat-raised-button color="primary" (click)="updateSnmp()">{{ updateSnmpString }}</button>
   </div>
   <mat-table class="full-width-table" matSort aria-label="Elements">
-
+  <!-- Checkbox Column -->
+  <ng-container matColumnDef="select">
+      <mat-header-cell *matHeaderCellDef>
+        <mat-checkbox
+          (change)="$event ? masterToggle() : null"
+          [checked]="selection.hasValue() && isAllSelected()"
+          [indeterminate]="selection.hasValue() && !isAllSelected()"
+          [aria-label]="checkboxLabel()"
+        >
+        </mat-checkbox>
+      </mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <mat-checkbox
+          (click)="$event.stopPropagation()"
+          (change)="$event ? selection.toggle(row) : null"
+          [checked]="selection.isSelected(row)"
+          [aria-label]="checkboxLabel(row)"
+        >
+        </mat-checkbox>
+      </mat-cell>
+    </ng-container>
     <!-- Id Column -->
     <ng-container matColumnDef="name">
       <mat-header-cell *matHeaderCellDef mat-sort-header>Name</mat-header-cell>
@@ -21,12 +42,10 @@
 
     <!-- Name Column -->
     <ng-container matColumnDef="snmp">
-      <mat-header-cell  *matHeaderCellDef mat-sort-header>Status</mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Status</mat-header-cell>
       <mat-cell *matCellDef="let row">{{ row.hasOwnProperty('snmp') ? 'up' : 'down' }}</mat-cell>
     </ng-container>
-    <ng-container>
-      <tr>test</tr>
-    </ng-container>
+
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;" matRipple class="element-row"
@@ -37,7 +56,7 @@
       [length]="dataSource?.data.length"
       [pageIndex]="0"
       [pageSize]="50"
-      [pageSizeOptions]="[25, 50, 100, 250]">
+      [pageSizeOptions]="[25, 50, 100, 250, 500]">
   </mat-paginator>
 </div>
 <ng-template #tpl let-element>

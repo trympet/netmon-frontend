@@ -1,0 +1,11 @@
+<main>
+  <form class="login mat-elevation-z2" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <mat-form-field>
+      <input matInput type="text" name="username" placeholder="Username" required formControlName="username">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput type="password" name="password" placeholder="Password" required formControlName="password">
+    </mat-form-field>
+    <button mat-flat-button color="primary">Log in</button>
+  </form>
+</main>

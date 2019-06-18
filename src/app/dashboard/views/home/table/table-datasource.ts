@@ -80,13 +80,15 @@ export class TableDataSource extends DataSource<TableItem> {
       (data: TableItem[]) => this.data = data,
       err => console.error(err),
       () => {
+        console.log(this.data);
+        
         this.snmpObservable.subscribe((value: Array<any>) => value.map( snmpObj => {
           this.data.find(hostsObj => hostsObj.host_id === snmpObj.host_id)['snmp'] = snmpObj.data       
         })
         )
         this.paginator.page.emit()
       }
-      )
+    )
       
       
       // array of 'eventlisteners' for updating data
@@ -98,7 +100,7 @@ export class TableDataSource extends DataSource<TableItem> {
     ];
     
         
-        
+    
         
         
     
@@ -106,7 +108,6 @@ export class TableDataSource extends DataSource<TableItem> {
     this.filter.subscribe(val => fVal = val)
         
     return merge(...dataMutations).pipe(map(() => {
-      console.log(this.data)
       if(fVal) {
         
         return this.getSortedData([...this.getFileredData([...this.data], fVal)])
@@ -144,6 +145,8 @@ export class TableDataSource extends DataSource<TableItem> {
    * this would be replaced by requesting the appropriate data from the server.
    */
   private getSortedData(data: TableItem[]) {
+    
+    
     if (!this.sort.active || this.sort.direction === '') {
       return data;
     }

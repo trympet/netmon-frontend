@@ -13,3 +13,8 @@ Dashboard:
   - filter: hostname, IP
   - pin devices to top
   - ignore devices
+
+1. show MIBs
+2. Create new varbind in MIB
+3. Add varbinds to group
+4. Add group to device
