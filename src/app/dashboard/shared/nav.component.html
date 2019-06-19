@@ -25,7 +25,7 @@
         <a type="button" mat-button *ngFor="let nav of navLinks" [routerLink]="nav.routerLink" routerLinkActive="focus">{{nav.name}}</a>
       </div>
     </mat-toolbar>
-    <!-- Add Content Here -->
+    <!-- Content from router goes here  -->
     <ng-content></ng-content>
   </mat-sidenav-content>
 </mat-sidenav-container>

@@ -30,6 +30,9 @@ export class DashboardService {
   getMibs() {
     return this.http.get(this.apiUrl + 'mibs')
   }
+  newGroup(groupName:string) {
+    return 'asd'
+  }
   addHostToGroup(groupId: number, device: TableItem[]) {
     const deviceIds = device.map( (device:TableItem) => device.host_id)
     console.log(deviceIds);

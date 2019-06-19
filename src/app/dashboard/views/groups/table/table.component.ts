@@ -1,8 +1,9 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Inject } from '@angular/core';
 import { SelectionModel } from '@angular/cdk/collections';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { DashboardService } from 'src/app/dashboard/dashboard.service';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 export interface Group {
   group_id: number;
@@ -29,9 +30,14 @@ export class GroupTableComponent implements OnInit {
       err => console.error(err),
       () => this.dataSource.paginator = this.paginator
     )
-    
+  }
 
-    
+  isSelected() {
+    return this.selection.selected.length > 0
+  }
+  
+  isOneSelected() {
+    return this.selection.selected.length === 1
   }
 
   isAllSelected() {
@@ -58,9 +64,42 @@ export class GroupTableComponent implements OnInit {
     this.dataSource.filter = filter.trim().toLowerCase()
   }
 
-  constructor(private dashboardService: DashboardService) {
-    
-  }
+  constructor(private dashboardService: DashboardService, public dialog: MatDialog) { }
 
-  
+  /** Adds selected hosts to group */
+  openDialog():void {
+    const dialogRef = this.dialog.open(NewGroupDialog, {
+      width: '250px',
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed', result);
+      if (result) {
+        this.dashboardService.newGroup(result)
+      }
+    });
+  }
 }
+
+@Component({
+  selector: 'new-group-dialog',
+  template: `
+  <h1 mat-dialog-title>Add host(s) to group</h1>
+  <div mat-dialog-content>
+    <mat-form-field>
+      <input matInput placeholder="Group name" [(ngModel)]="groupName">
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">Return</button>
+    <button mat-button [mat-dialog-close]="this.groupName" cdkFocusInitial>Confirm</button>
+  </div>
+  `
+})
+export class NewGroupDialog {
+  groupName: string;
+  constructor(public dialogRef: MatDialogRef<NewGroupDialog>, @Inject(MAT_DIALOG_DATA) public data: any) {}
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+}
+

@@ -3,7 +3,8 @@
     <mat-form-field>
       <input matInput type="text" (keyup)="filterTable($event.target.value)" placeholder="Filter hostnames">
     </mat-form-field>
-    <!-- <button mat-raised-button color="primary" (click)="updateSnmp()"  style="float: right; margin-top: 10px;">{{ updateSnmpString }}</button> -->
+    <button mat-raised-button color="primary" [disabled]="!isSelected()" style="float: right; margin-top: 10px;">Delete group</button>
+    <button mat-raised-button color="primary" style="float: right; margin-top: 10px;" (click)="openDialog()">New group</button>
   </div>
   <table mat-table [dataSource]="dataSource" style="width: 100%">
     <!-- Checkbox Column -->
@@ -52,7 +53,7 @@
     <tr
       mat-row
       *matRowDef="let row; columns: displayedColumns"
-      (click)="selection.toggle(row)"
+      [routerLink]="['/dashboard/groups/', row.group_id]"
     ></tr>
 
   </table>

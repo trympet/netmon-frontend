@@ -11,7 +11,7 @@ import {
   TableComponent,
   AddToGroupDialog,
 } from './views/home/table/table.component';
-import { GroupTableComponent } from './views/groups/table/table.component';
+import { GroupTableComponent, NewGroupDialog } from './views/groups/table/table.component';
 import {
   MatTableModule,
   MatPaginatorModule,
@@ -33,6 +33,8 @@ import { MibsComponent } from './views/mibs/mibs.component';
 import { MibTableComponent } from './views/mibs/mib-table/mib-table.component';
 import { AuthRequestOptions } from '../auth/auth.service';
 import { AuthErrorHandler } from '../auth/auth-error-handler';
+import { GroupFocusComponent } from './views/groups/group-focus/group-focus.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -44,11 +46,13 @@ import { AuthErrorHandler } from '../auth/auth-error-handler';
     GroupsComponent,
     VarbindsComponent,
     AddToGroupDialog,
+    NewGroupDialog,
     VarbindTableComponent,
     MibsComponent,
     MibTableComponent,
+    GroupFocusComponent,
   ],
-  entryComponents: [AddToGroupDialog],
+  entryComponents: [AddToGroupDialog, NewGroupDialog],
   imports: [
     HttpClientModule,
     CommonModule,
@@ -64,6 +68,7 @@ import { AuthErrorHandler } from '../auth/auth-error-handler';
     MatCheckboxModule,
     MatDialogModule,
     MatSelectModule,
+    FormsModule
   ],
   providers: [
     DashboardService,

@@ -106,8 +106,6 @@ export class TableComponent implements AfterViewInit, OnInit {
 
   /** Adds selected hosts to group */
   openDialog():void {
-
-
     const dialogRef = this.dialog.open(AddToGroupDialog, {
       width: '250px',
       data: {groups: this.dashboardService.getGroups()}
@@ -117,7 +115,6 @@ export class TableComponent implements AfterViewInit, OnInit {
       if (result) {
         this.dashboardService.addHostToGroup(result, this.selection.selected).subscribe()
       }
-
     });
   }
 

@@ -3,7 +3,7 @@
     <mat-form-field>
       <input matInput type="text" (keyup)="filterTable($event.target.value)" placeholder="Filter hostnames">
     </mat-form-field>
-    <button mat-raised-button *ngIf="isSelected()" (click)="openDialog()">Add to group</button>
+    <button mat-raised-button [disabled]="!isSelected()" (click)="openDialog()">Add to group</button>
     <button mat-raised-button color="primary" (click)="updateSnmp()">{{ updateSnmpString }}</button>
   </div>
   <mat-table class="full-width-table" matSort aria-label="Elements">
