@@ -26,7 +26,7 @@ export class VarbindTableComponent implements OnInit {
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
   ngOnInit() { 
-    this.dashboardService.getVarbinds().subscribe(
+    this.dashboardService.getAllVarbinds().subscribe(
       (val: Varbind[]) => this.dataSource = new MatTableDataSource<Varbind>(val),
       err => console.error(err),
       () => this.dataSource.paginator = this.paginator

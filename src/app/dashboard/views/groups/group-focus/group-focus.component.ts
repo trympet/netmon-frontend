@@ -12,7 +12,7 @@ export class GroupFocusComponent implements OnInit {
   constructor(private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.route.params.subscribe((groupId:Number) => this.id = parseInt(groupId.id))
+    this.route.params.subscribe((groupId:Number) => this.id = parseInt(groupId['id']))
   }
 
 }

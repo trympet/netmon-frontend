@@ -24,21 +24,34 @@ export class DashboardService {
   getGroups() {
     return this.http.get(this.apiUrl + 'groups')
   }
-  getVarbinds() {
+  /** Gets all varbinds from database */
+  getAllVarbinds() {
     return this.http.get(this.apiUrl + 'varbinds')
+  }
+  /**
+   * Gets varbinds in MIB
+   * @param mibID - Id for MIB you want to get varbinds for
+   */
+  getVarbindsInMib(mibId:Number) {
+    return this.http.post(this.apiUrl + 'varbindsinmib', {"mibId": mibId})
   }
   getMibs() {
     return this.http.get(this.apiUrl + 'mibs')
   }
+  /**
+   * Creates a new group
+   * @param groupName Name of new group
+   */
   newGroup(groupName:string) {
-    return 'asd'
+    return this.http.post(this.apiUrl + 'newgroup', {"groupName": groupName})
   }
+  /** Adds one or more hosts to group
+   * @param groupId - ID of group
+   * @param device - array of devices to be added to group
+   */
   addHostToGroup(groupId: number, device: TableItem[]) {
     const deviceIds = device.map( (device:TableItem) => device.host_id)
-    console.log(deviceIds);
-    
     return this.http.post(this.apiUrl + 'devicetogroup', {"hostId": deviceIds, "groupId": groupId})
-    
   }
   getSnmpResult() {
     return this.snmpResult

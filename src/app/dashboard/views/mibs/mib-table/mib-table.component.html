@@ -54,7 +54,7 @@
     <tr
       mat-row
       *matRowDef="let row; columns: displayedColumns"
-      (click)="selection.toggle(row)"
+      [routerLink]="[row.mib_id,'varbinds']"
     ></tr>
 
   </table>

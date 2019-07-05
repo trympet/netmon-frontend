@@ -12,7 +12,7 @@ const routes: Routes = [
     {path: 'groups', component: GroupsComponent},
     {path: 'groups/:id', component: GroupFocusComponent},
     {path: 'mibs', component: MibsComponent},
-    {path: 'mibs/:mib/varbinds', component: VarbindsComponent},
+    {path: 'mibs/:id/varbinds', component: VarbindsComponent},
     {path: '', component: HomeComponent},
   ]}
 ];
